@@ -28,15 +28,14 @@ ui-view {
 }
 
 .title-bar {
-    -webkit-user-select: none;
+    user-select: none;
     border-bottom: 1px solid #aaa;
-    display: table;
-    width: 100%;
+    display: flex;
 
     .title {
         cursor: default;
-        display: table-cell;
         padding: 4px 0 0 4px;
+        flex-grow: 1;
         
         .draggable {
             padding: 7px 11px 11px;
@@ -45,10 +44,10 @@ ui-view {
     }
     
     .actions {
-        display: table-cell;
         width: 114px;
         font-size: 22px;
         cursor: default;
+        padding: 4px 8px;
 
         span {
             cursor: pointer;
