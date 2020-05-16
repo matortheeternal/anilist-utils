@@ -2,13 +2,12 @@ export default function(ngapp, remote) {
     ngapp.config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('base', {
             url: '',
-            redirectTo: 'base.start',
             templateUrl: 'partials/base.html',
             controller: 'baseController'
         });
     }]);
 
-    ngapp.controller('baseController', function ($scope, $document) {
+    ngapp.controller('baseController', function ($scope, $document, $state) {
         var hostWindow = remote.getCurrentWindow();
 
         $scope.helpClick = function () {
@@ -39,12 +38,15 @@ export default function(ngapp, remote) {
         // keyboard shortcuts
         $document.bind('keypress', function(e) {
             // ctrl + shift + i
-            if (e.which === 9 && e.shiftKey && e.ctrlKey) {
+            if (e.keyCode === 9 && e.shiftKey && e.ctrlKey) {
                 hostWindow.toggleDevTools();
             // ctrl + r
-            } else if (e.which === 18 && e.ctrlKey) {
+            } else if (e.keyCode === 18 && e.ctrlKey) {
                 location.reload();
             }
         });
+
+        // redirect to start
+        $state.go('base.start');
     });
 }
