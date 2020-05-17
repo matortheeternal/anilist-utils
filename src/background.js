@@ -5,22 +5,12 @@
 
 import path from 'path';
 import url from 'url';
-import { app, Menu } from 'electron';
-import { devMenuTemplate } from './menu/dev_menu_template';
-import { editMenuTemplate } from './menu/edit_menu_template';
+import { app } from 'electron';
 import createWindow from './helpers/window';
 
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
 import env from './env';
-
-const setApplicationMenu = () => {
-  const menus = [editMenuTemplate];
-  if (env.name !== 'production') {
-    menus.push(devMenuTemplate);
-  }
-  Menu.setApplicationMenu(Menu.buildFromTemplate(menus));
-};
 
 // Save userData in separate folders for each environment.
 // Thanks to this you can use production and development versions of the app
@@ -33,8 +23,6 @@ if (env.name !== 'production') {
 app.allowRendererProcessReuse = true;
 
 app.on('ready', () => {
-  //setApplicationMenu();
-
   const appUrl = url.format({
     pathname: path.join(__dirname, 'app.html'),
     protocol: 'file:',
