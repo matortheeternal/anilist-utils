@@ -1,5 +1,5 @@
 export default function(ngapp) {
-    ngapp.config(['$stateProvider', function ($stateProvider) {
+    ngapp.config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('base.start', {
             templateUrl: 'partials/start.html',
             controller: 'startController',
@@ -7,7 +7,9 @@ export default function(ngapp) {
         });
     }]);
 
-    ngapp.controller('startController', function ($scope) {
-        $scope.message = 'Hello World!';
+    ngapp.controller('startController', function($scope, $state) {
+        $scope.makeCharacterTierList = function() {
+            $state.go('base.makeCharacterList');
+        };
     });
 }

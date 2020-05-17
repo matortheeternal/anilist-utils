@@ -5,6 +5,7 @@ import fh from './helpers/fileHelpers.js';
 import env from './env';
 import baseView from './Views/base.js';
 import startView from './Views/start.js';
+import makeCharacterListView from './Views/makeCharacterList.js';
 
 // set up helpers
 let fileHelpers = fh(remote, jetpack);
@@ -22,3 +23,4 @@ ngapp.config(function ($urlMatcherFactoryProvider) {
 // VIEWS
 baseView(ngapp, remote);
 startView(ngapp);
+makeCharacterListView(ngapp);
