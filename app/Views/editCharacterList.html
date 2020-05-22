@@ -1,0 +1,36 @@
+<div class="edit-character-list">
+    <div class="left-column">
+        <div class="media-entries" ng-if="list.mediaEntries">
+            <div class="media-entry" ng-repeat="group in list.mediaEntries">
+                <expandable-section>
+                    <title>
+                        {{::group.title}}
+                        ({{::group.characterCount}} characters)
+                    </title>
+                    <contents>
+                        <list-view class="character-list" items="group.characters" filter="characterStoreFilter" drag-type="characterStore" horizontal>
+                            <character-image></character-image>
+                        </list-view>
+                    </contents>
+                </expandable-section>
+            </div>
+        </div>
+
+        <div class="query-options">
+            <label>
+                <span>Anilist profile name</span>
+                <input type="text" ng-model="list.profileName">
+            </label>
+            <button ng-click="loadData()" ng-if="!list.mediaEntries">Load Data</button>
+            <button ng-click="updateData()" ng-if="list.mediaEntries">Update Data</button>
+        </div>
+    </div>
+
+    <div class="right-column">
+        <div class="character-list-title">
+            <input type="text" ng-model="list.title" pu-elastic-input/>
+
+            <tier-chart tiers="list.tiers"></tier-chart>
+        </div>
+    </div>
+</div>

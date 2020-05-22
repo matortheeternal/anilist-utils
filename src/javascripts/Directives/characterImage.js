@@ -1,0 +1,25 @@
+export default function({ngapp}) {
+    ngapp.directive('characterImage', function() {
+        return {
+            restrict: 'E',
+            scope: {
+                character: '=?'
+            },
+            templateUrl: 'Directives/characterImage.html',
+            controller: 'characterImageController'
+        };
+    });
+
+    ngapp.controller('characterImageController', function($scope, imageCacheService) {
+        if (!$scope.character) $scope.character = $scope.$parent.$parent.item;
+        let remoteUrl = $scope.character && $scope.character.image.medium;
+
+        $scope.imageUrl = remoteUrl;
+        /*imageCacheService.cache(remoteUrl).then(fileUrl => {
+            $scope.imageUrl = fileUrl;
+        }, err => {
+            console.error('Error loading image for character: ', character, err);
+            $scope.imageUrl = errorImageUrl;
+        });*/
+    });
+}

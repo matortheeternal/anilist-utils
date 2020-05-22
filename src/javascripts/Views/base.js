@@ -1,13 +1,13 @@
-export default function(ngapp, remote) {
+export default function({ngapp, remote}) {
     ngapp.config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('base', {
             url: '',
-            templateUrl: 'partials/base.html',
+            templateUrl: 'Views/base.html',
             controller: 'baseController'
         });
     }]);
 
-    ngapp.controller('baseController', function ($scope, $document, $state) {
+    ngapp.controller('baseController', function ($rootScope, $scope, $document, $state) {
         var hostWindow = remote.getCurrentWindow();
 
         $scope.helpClick = function () {
@@ -33,6 +33,14 @@ export default function(ngapp, remote) {
         $scope.$on('terminate', function() {
             remote.app.forceClose = true;
             $scope.closeClick();
+        });
+
+        $scope.$on('startDrag', (e, dragData) => {
+            $rootScope.dragData = dragData
+        });
+
+        $scope.$on('stopDrag', () => {
+            $rootScope.dragData = undefined
         });
 
         // keyboard shortcuts

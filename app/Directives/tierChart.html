@@ -1,0 +1,13 @@
+<div class="tier-row" ng-repeat="tier in tiers">
+    <div class="tier-label">
+        <input ng-model="tier.label" pu-elastic-input>
+    </div>
+    <div class="remove-item" ng-click="removeTier(tier)">
+        <span class="fa fa-times"></span>
+    </div>
+    <div class="tier-items">
+        <list-view class="character-list" items="tier.characters" drag-type="characterList">
+            <character-image></character-image>
+        </list-view>
+    </div>
+</div>

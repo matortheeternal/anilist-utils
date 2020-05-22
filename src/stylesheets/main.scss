@@ -22,81 +22,16 @@ a {
     text-decoration: none;
 }
 
+body > .content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
 ui-view {
     text-align: center;
-}
-
-.title-bar {
-    user-select: none;
-    border-bottom: 1px solid #aaa;
-    display: flex;
-
-    .title {
-        cursor: default;
-        padding: 4px 0 0 4px;
-        flex-grow: 1;
-        
-        .draggable {
-            padding: 7px 11px 11px;
-            -webkit-app-region: drag;
-        }
-    }
-    
-    .actions {
-        width: 114px;
-        font-size: 22px;
-        cursor: default;
-        padding: 4px 8px;
-
-        span {
-            cursor: pointer;
-            display: inline-block;
-            vertical-align: middle;
-            min-width: 18px;
-        }
-
-        .help {
-            &::before {
-                content: '?';
-            }
-        }
-
-        .divider {
-            cursor: default;
-            opacity: 0.4;
-            border-right: 1px solid #aaa;
-            min-width: initial;
-            min-height: 26px;
-            margin-right: 8px;
-        }
-
-        .minimize {
-            margin-top: -6px;
-
-            &::before {
-                content: '_';
-            }
-        }
-
-        .restore {
-            font-size: 33px;
-            line-height: 16px;
-            margin-top: -6px;
-
-            &::before {
-                content: '\25A1';
-            }
-        }
-
-        .close {
-            margin-top: 1px;
-
-            &::before {
-                content: 'X';
-            }
-        }
-    }
+    flex-grow: 1;
+    overflow-y: hidden;
 }
 
 .monospace {
@@ -106,3 +41,9 @@ ui-view {
 .clickable {
     cursor: pointer;
 }
+
+@import './Views/base';
+@import './Views/editCharacterListView';
+@import './Components/tierChart';
+@import './Components/expandableSection';
+@import './Components/characterImage';

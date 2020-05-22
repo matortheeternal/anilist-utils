@@ -1,40 +1,63 @@
+import url from 'url';
+
 export default function(remote, jetpack) {
     let fh = {};
 
     fh.jetpack = jetpack;
     fh.appPath = remote.app.getAppPath();
     fh.appDir = jetpack.cwd(fh.appPath);
+    fh.path = jetpack.path;
 
-    // log app directory for reference
     console.log('App directory: ' + fh.appPath);
 
-    // helper function for loading json file
     fh.loadJsonFile = function(filename, defaultValue = []) {
-        if (fh.jetpack.exists(filename) === 'file') {
+        if (fh.jetpack.exists(filename) === 'file')
             return fh.jetpack.read(filename, 'json');
-        } else {
-            return defaultValue;
-        }
     };
 
     fh.loadResource = function(filename, defaultValue = []) {
-        if (fh.appDir.exists(filename) === 'file') {
+        if (fh.appDir.exists(filename) === 'file')
             return fh.appDir.read(filename, 'json');
-        } else {
-            return defaultValue;
-        }
     };
 
-    // helper function for saving json files
+    fh.getFiles = function(path, options) {
+        if (jetpack.exists(path) !== 'dir') return [];
+        return jetpack.find(path, options)
+            .map(path => jetpack.path(path));
+    };
+
     fh.saveJsonFile = function(filename, value, minify = false) {
         fh.jetpack.write(filename, minify ? JSON.stringify(value) : value);
+    };
+
+    fh.getFileBase = function(filePath) {
+        return filePath.match(/(.*[\\\/])?(.*)\.[^\\\/]+/)[2];
+    };
+
+    fh.getFileExt = function(filePath) {
+        return filePath.match(/(.*[\\\/])?.*\.([^\\\/]+)/)[2];
+    };
+
+    fh.getFileName = function(filePath) {
+        return filePath.match(/(.*[\\\/])?(.*)/)[2];
+    };
+
+    fh.getDirectory = function(filePath) {
+        return filePath.match(/(.*)[\\\/].*/)[1];
     };
 
     fh.getDateModified = function(filename) {
         return fh.jetpack.inspect(filename, {times: true}).modifyTime;
     };
 
-    // helper function for selecting a directory
+    fh.pathToFileUrl = function(path) {
+        return url.format({
+            pathname: jetpack.path(path).replace(/\\/g, '/'),
+            protocol: 'file:',
+            slashes: true
+        })
+    };
+
     fh.selectDirectory = function(title, defaultPath) {
         let selection = remote.dialog.showOpenDialog({
             title: title,

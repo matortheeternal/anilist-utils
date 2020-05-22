@@ -1,0 +1,13 @@
+character-image {
+  display: flex;
+  height: 150px;
+  width: 100px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}

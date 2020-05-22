@@ -1,0 +1,45 @@
+tier-chart {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  border: 1px solid;
+
+  .tier-row {
+    display: flex;
+    position: relative;
+    min-height: 150px;
+    border-top: 1px solid;
+
+    &:first-of-type {
+      border-top: none;
+    }
+  }
+
+  .tier-label {
+    border-right: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 100px;
+
+    input {
+      border: none;
+      font-size: 40px;
+      text-align: center;
+      width: 50px;
+    }
+  }
+
+  .remove-item {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    cursor: pointer;
+  }
+
+  .tier-items {
+    flex-grow: 1;
+    overflow-x: hidden;
+  }
+}

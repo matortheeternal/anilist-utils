@@ -1,7 +1,7 @@
-export default function(ngapp) {
+export default function({ngapp}) {
     ngapp.config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('base.start', {
-            templateUrl: 'partials/start.html',
+            templateUrl: 'Views/start.html',
             controller: 'startController',
             url: '/start'
         });
@@ -9,7 +9,7 @@ export default function(ngapp) {
 
     ngapp.controller('startController', function($scope, $state) {
         $scope.makeCharacterTierList = function() {
-            $state.go('base.makeCharacterList');
+            $state.go('base.manageCharacterLists');
         };
     });
 }
