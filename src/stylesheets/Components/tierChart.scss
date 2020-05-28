@@ -41,5 +41,10 @@ tier-chart {
   .tier-items {
     flex-grow: 1;
     overflow-x: hidden;
+
+    .list-items {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
   }
 }

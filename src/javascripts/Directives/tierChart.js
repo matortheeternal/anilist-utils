@@ -12,6 +12,8 @@ export default function({ngapp}) {
     });
 
     ngapp.controller('tierChartController', function($scope) {
+        let allowedDragTypes = ['characterList', 'characterStore'];
+
         $scope.addTier = function() {
             $scope.tiers.push({
                 label: '?',
@@ -22,5 +24,18 @@ export default function({ngapp}) {
         $scope.removeTier = function(tier) {
             $scope.tiers.remove(tier);
         };
+
+        $scope.dropAllowed = function(dragData) {
+            return dragData && allowedDragTypes.includes(dragData.source);
+        };
+
+        // events
+        $scope.$on('itemRemoved', (e, item) => {
+            item.assigned = false;
+        });
+
+        $scope.$on('itemAdded', (e, item) => {
+            item.assigned = true;
+        });
     });
 }

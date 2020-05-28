@@ -8,7 +8,6 @@ import baseView from './Views/base.js';
 import startView from './Views/start.js';
 import manageCharacterListsView from './Views/manageCharacterLists.js';
 import editCharacterListView from './Views/editCharacterList.js';
-import dragModes from './Providers/dragModes.js';
 import dataInterface from './Interfaces/dataInterface.js';
 import listDragInterface from './Interfaces/listDragInterface.js';
 import anilistService from './Services/anilistService.js';
@@ -22,6 +21,7 @@ import dropover from './Directives/dropover.js';
 import ngDrag from './Directives/ngDrag.js';
 import ngDrop from './Directives/ngDrop.js';
 import expandableSection from "./Directives/expandableSection";
+import characterListDisplayInterface from "./Interfaces/characterListDisplayInterface";
 
 // set up angular application
 let ngapp = angular.module('application', [
@@ -37,12 +37,10 @@ ngapp.config(function ($urlMatcherFactoryProvider) {
     $urlMatcherFactoryProvider.strictMode(false);
 });
 
-// PROVIDERS
-dragModes(args);
-
 // INTERFACES
 dataInterface(args);
 listDragInterface(args);
+characterListDisplayInterface(args);
 
 // SERVICES
 anilistService(args);

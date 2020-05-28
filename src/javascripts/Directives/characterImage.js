@@ -10,11 +10,12 @@ export default function({ngapp}) {
         };
     });
 
-    ngapp.controller('characterImageController', function($scope, imageCacheService) {
+    ngapp.controller('characterImageController', function($scope, $element, imageCacheService) {
         if (!$scope.character) $scope.character = $scope.$parent.$parent.item;
         let remoteUrl = $scope.character && $scope.character.image.medium;
 
-        $scope.imageUrl = remoteUrl;
+        $element[0].style['background-image'] = `url("${remoteUrl}")`;
+        $element[0].title = $scope.character.name.full;
         /*imageCacheService.cache(remoteUrl).then(fileUrl => {
             $scope.imageUrl = fileUrl;
         }, err => {

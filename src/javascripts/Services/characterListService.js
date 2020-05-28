@@ -10,22 +10,18 @@ let getCharacterCount = function(characters) {
     return characters.count(c => !c.hidden && !c.assigned);
 };
 
-let getMediaEntries = function(entries, list) {
+let getMediaEntries = function(entries) {
     let mediaEntries = [];
     entries.forEach(({media, score}) => {
-        let characterIds = getMediaCharacterIds(media),
-            characters = lookupCharacters(characterIds, list.characters),
-            characterCount = getCharacterCount(characters);
+        let characterIds = getMediaCharacterIds(media);
         mediaEntries.push({
             id: media.id,
             title: media.title.english || media.title.romaji,
             score: score,
-            characterIds,
-            characters,
-            characterCount
+            characterIds
         });
     });
-    return mediaEntries.sortBy('score');
+    return mediaEntries.sortByKey('score');
 };
 
 let getCharacters = function(entries) {
@@ -52,20 +48,6 @@ let getDefaultTiers = function() {
     }));
 };
 
-let importListData = function(list) {
-    let {mediaEntries, characters} = list;
-    mediaEntries.forEach(entry => {
-        entry.characters = lookupCharacters(entry.characterIds, characters);
-        entry.characterCount = getCharacterCount(entry.characters);
-    });
-};
-
-let exportListData = function(list) {
-    return {
-        
-    }
-};
-
 export default function({ngapp}) {
     ngapp.service('characterListService', function(anilistService, dataInterface) {
         let service = this;
@@ -90,12 +72,13 @@ export default function({ngapp}) {
 
         this.loadList = function(filename) {
             let list = service.loadDataFile(filename);
-            return importListData(list);
+            list.filename = filename;
+            return list;
         };
 
         this.saveList = function(list) {
-            let filename = service.generateFilename(list.title);
-            service.saveDataFile(filename, exportListData(list));
+            if (!list.filename) list.filename = service.generateFilename(list.title);
+            service.saveDataFile(list.filename, list);
         };
 
         this.newList = () => ({

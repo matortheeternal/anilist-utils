@@ -6,7 +6,7 @@ export default function({ngapp}) {
             transclude: true,
             scope: {
                 items: '=',
-                filter: '=',
+                dropAllowed: '=?',
                 defaultAction: '=?',
                 dragType: '@',
                 disableDrag: '=?'
@@ -17,6 +17,10 @@ export default function({ngapp}) {
 
     ngapp.controller('listViewController', function($scope, $element, htmlHelpers, listDragInterface) {
         // initialization
+        if (!$scope.dropAllowed) $scope.dropAllowed = (dragData) => {
+            return dragData && dragData.source === $scope.dragType;
+        };
+
         $scope.parent = htmlHelpers.findParent($element[0], el => {
             return el.hasAttribute('list-view-parent');
         });
@@ -26,10 +30,5 @@ export default function({ngapp}) {
 
         // interfaces
         listDragInterface($scope);
-
-        // watchers
-        $scope.$watch('items', function() {
-            $scope.displayItems = $scope.items.filter($scope.filter || (() => true));
-        }, true);
     });
 }

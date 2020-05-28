@@ -17,7 +17,7 @@
     overflow-y: auto;
   }
 
-  .media-entries {
+  .groups-container, .characters-container {
     text-align: left;
     margin-bottom: 32px;
 
@@ -44,16 +44,12 @@
     display: flex;
     align-items: center;
     justify-content: start;
-    overflow-x: auto;
-
-    > div {
-      margin: 2px;
-    }
+    flex-wrap: wrap;
 
     .placeholder {
       margin: 0;
       height: 150px;
-      width: 100%;
+      flex-grow: 1;
     }
   }
 }

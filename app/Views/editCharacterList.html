@@ -1,14 +1,44 @@
 <div class="edit-character-list">
     <div class="left-column">
-        <div class="media-entries" ng-if="list.mediaEntries">
-            <div class="media-entry" ng-repeat="group in list.mediaEntries">
+        <div class="display-options">
+            <label>
+                <input type="checkbox" ng-model="showSupportingCharacters">
+                <span>Show supporting characters</span>
+            </label>
+            <label>
+                <span>Group by</span>
+                <select ng-model="groupBy">
+                    <option>None</option>
+                    <option>Media</option>
+                    <option>Popularity</option>
+                </select>
+            </label>
+            <label ng-if="groupBy === 'Media'">
+                <span>Sort groups by</span>
+                <select ng-model="sortGroupsBy">
+                    <option>Score</option>
+                    <option>Name</option>
+                    <option>Popularity</option>
+                </select>
+            </label>
+            <label>
+                <span>Sort entries by</span>
+                <select ng-model="sortBy">
+                    <option>Popularity</option>
+                    <option>Name</option>
+                </select>
+            </label>
+        </div>
+
+        <div ng-if="groups" class="groups-container">
+            <div class="media-entry" ng-repeat="group in groups" ng-hide="!group.characters.length">
                 <expandable-section>
                     <title>
                         {{::group.title}}
-                        ({{::group.characterCount}} characters)
+                        ({{group.characters.length}} characters)
                     </title>
                     <contents>
-                        <list-view class="character-list" items="group.characters" filter="characterStoreFilter" drag-type="characterStore" horizontal>
+                        <list-view class="character-list" items="group.characters" drop-allowed="noDrop" drag-type="characterStore" horizontal>
                             <character-image></character-image>
                         </list-view>
                     </contents>
@@ -16,9 +46,15 @@
             </div>
         </div>
 
+        <div ng-if="characters" class="characters-container">
+            <list-view class="character-list" items="characters" drop-allowed="noDrop" drag-type="characterStore" horizontal>
+                <character-image></character-image>
+            </list-view>
+        </div>
+
         <div class="query-options">
             <label>
-                <span>Anilist profile name</span>
+                <span>Anilist user name</span>
                 <input type="text" ng-model="list.profileName">
             </label>
             <button ng-click="loadData()" ng-if="!list.mediaEntries">Load Data</button>

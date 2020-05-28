@@ -1,10 +1,6 @@
 export default function({ngapp}) {
-    ngapp.factory('listDragInterface', function(dragModes) {
+    ngapp.factory('listDragInterface', function() {
         return function($scope) {
-            // helper variables
-            let prevIndex = -1,
-                dragMode = dragModes[$scope.dragType];
-
             // helper functions
             let removeClasses = function(element) {
                 element.classList.remove('insert-after');
@@ -31,7 +27,11 @@ export default function({ngapp}) {
                     element: e.target,
                     source: $scope.dragType,
                     index: index,
-                    getItem: () => dragMode.getItem($scope, index)
+                    getItem: () => {
+                        let item = $scope.items.splice(index, 1)[0];
+                        $scope.$emit('itemRemoved', item);
+                        return item;
+                    }
                 });
                 return true;
             };
@@ -39,7 +39,7 @@ export default function({ngapp}) {
             $scope.onItemDragOver = function(e, index) {
                 if (!$scope.dragType || $scope.disableDrag) return;
                 let dragData = $scope.$root.dragData;
-                if (!dragMode.dropAllowed(dragData)) return;
+                if (!$scope.dropAllowed(dragData)) return;
                 if (onSameItem(dragData, e, index)) return true;
                 let after = getAfter(e);
                 e.target.classList[after ? 'add' : 'remove']('insert-after');
@@ -48,7 +48,7 @@ export default function({ngapp}) {
             };
 
             $scope.onPlaceholderDragOver = function() {
-                return dragMode.dropAllowed($scope.$root.dragData);
+                return $scope.dropAllowed($scope.$root.dragData);
             };
 
             $scope.onItemDragLeave = (e) => removeClasses(e.target);
@@ -56,7 +56,7 @@ export default function({ngapp}) {
             $scope.onItemDrop = function(e, index) {
                 if (!$scope.dragType || $scope.disableDrag) return;
                 let dragData = $scope.$root.dragData;
-                if (!dragMode.dropAllowed(dragData)) return;
+                if (!$scope.dropAllowed(dragData)) return;
                 if (onSameItem(dragData, e, index)) return;
                 let after = getAfter(e),
                     lengthBefore = $scope.items.length,
@@ -64,15 +64,17 @@ export default function({ngapp}) {
                     adjust = lengthBefore > $scope.items.length && index > dragData.index;
                 removeClasses(e.target);
                 $scope.items.splice(index + after - adjust, 0, movedItem);
-                prevIndex = index + after - adjust;
+                $scope.$emit('itemAdded', movedItem);
                 $scope.$emit('itemsReordered');
                 return true;
             };
 
             $scope.onPlaceholderDrop = function() {
                 let dragData = $scope.$root.dragData;
-                if (!dragMode.dropAllowed(dragData)) return;
-                $scope.items.push(dragData.getItem());
+                if (!$scope.dropAllowed(dragData)) return;
+                let movedItem = dragData.getItem();
+                $scope.items.push(movedItem);
+                $scope.$emit('itemAdded', movedItem);
                 $scope.$emit('itemsReordered');
                 return true;
             };
