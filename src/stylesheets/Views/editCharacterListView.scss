@@ -19,7 +19,7 @@
 
   .groups-container, .characters-container {
     text-align: left;
-    margin-bottom: 32px;
+    padding: 16px;
 
     .media-entry {
       margin: 4px 0;
@@ -36,6 +36,19 @@
     padding: 2px;
     text-align: center;
     margin-bottom: 16px;
+  }
+
+  .display-options {
+    display: flex;
+    border-bottom: 1px solid;
+    padding: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    > label {
+      white-space: nowrap;
+      padding: 4px 10px;
+    }
   }
 }
 

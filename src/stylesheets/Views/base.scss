@@ -70,3 +70,17 @@
     }
   }
 }
+
+.view-actions {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  padding: 20px;
+  border-top: 1px solid;
+  background: white;
+}
+
+.query-options {
+  padding: 20px;
+}
