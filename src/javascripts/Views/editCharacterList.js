@@ -8,7 +8,7 @@ export default function({ngapp}) {
         });
     }]);
 
-    ngapp.controller('editCharacterListController', function($scope, $stateParams, $timeout, characterListService, characterListDisplayInterface) {
+    ngapp.controller('editCharacterListController', function($scope, $state, $stateParams, $timeout, characterListService, characterListDisplayInterface) {
         $scope.list = $stateParams.list;
 
         // interfaces
@@ -34,6 +34,14 @@ export default function({ngapp}) {
 
         $scope.characterStoreFilter = function(item) {
             return !item.assigned && !item.hidden;
+        };
+
+        $scope.saveList = function() {
+            characterListService.saveList($scope.list);
+        };
+
+        $scope.back = function() {
+            $state.go('base.manageCharacterLists');
         };
 
         $scope.dropAllowed = () => false;

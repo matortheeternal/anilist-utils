@@ -13,7 +13,7 @@
                     <option>Popularity</option>
                 </select>
             </label>
-            <label ng-if="groupBy === 'Media'">
+            <label ng-show="groupBy === 'Media'">
                 <span>Sort groups by</span>
                 <select ng-model="sortGroupsBy">
                     <option>Score</option>
@@ -69,4 +69,9 @@
             <tier-chart tiers="list.tiers"></tier-chart>
         </div>
     </div>
+</div>
+
+<div class="view-actions">
+    <button ng-click="saveList()">Save</button>
+    <button ng-click="back()">Back</button>
 </div>
