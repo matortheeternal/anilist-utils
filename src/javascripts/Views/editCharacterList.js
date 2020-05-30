@@ -60,5 +60,6 @@ export default function({ngapp}) {
         $scope.$watch('sortBy', $scope.displayCharacters);
         $scope.$watch('groupBy', $scope.displayCharacters);
         $scope.$watch('sortGroupsBy', $scope.displayCharacters);
+        $scope.$watch('showSupportingCharacters', $scope.displayCharacters);
     });
 }

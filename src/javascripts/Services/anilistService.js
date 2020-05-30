@@ -1,4 +1,4 @@
-let listCharactersQuery = ({mediaType, status, role}) =>
+let listCharactersQuery = ({mediaType, status}) =>
 `query ($userName: String) {
   MediaListCollection(userName: $userName, type: ${mediaType}, status: ${status}) {
     hasNextChunk,
@@ -8,12 +8,15 @@ let listCharactersQuery = ({mediaType, status, role}) =>
         media {
           id,
           title { english, romaji },
-          characters(role: ${role}) {
-            nodes {
-              id,
-              name { full },
-              image { medium },
-              favourites
+          characters {
+            edges {
+              role,
+              node {
+                id,
+                name { full },
+                image { medium },
+                favourites
+              }
             }
           }
         }

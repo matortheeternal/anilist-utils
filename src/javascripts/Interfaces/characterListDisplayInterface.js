@@ -31,13 +31,17 @@ export default function({ngapp}) {
             }.switch(() => scope.sortGroupsBy);
 
             let showCharacter = function(character) {
-                if (character.hidden || character.assigned) return false;
-                return character.role !== 'Supporting' || scope.showSupportingCharacters;
-            }
+                return !character.hidden && !character.assigned;
+            };
 
             // public api
             scope.getCharacters = function(entry) {
-                let characters = entry.characterIds
+                let characterIds = Array.prototype.concat(
+                    entry.mainCharacterIds,
+                    scope.showSupportingCharacters ?
+                        entry.supportingCharacterIds : []
+                );
+                let characters = characterIds
                     .map(id => scope.list.characters[id])
                     .filter(showCharacter);
                 return sortCharacters(characters);

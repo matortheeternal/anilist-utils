@@ -1,24 +1,18 @@
-let lookupCharacters = function(ids, characters) {
-    return ids.map(id => characters[id]);
-};
-
-let getMediaCharacterIds = function(media) {
-    return media.characters.nodes.pluck('id');
-}
-
-let getCharacterCount = function(characters) {
-    return characters.count(c => !c.hidden && !c.assigned);
+let getCharacterIds = function(media, role) {
+    return media.characters.edges.filter(edge => {
+        return edge.role === role;
+    }).map(edge => edge.node.id);
 };
 
 let getMediaEntries = function(entries) {
     let mediaEntries = [];
     entries.forEach(({media, score}) => {
-        let characterIds = getMediaCharacterIds(media);
         mediaEntries.push({
             id: media.id,
             title: media.title.english || media.title.romaji,
             score: score,
-            characterIds
+            mainCharacterIds: getCharacterIds(media, 'MAIN'),
+            supportingCharacterIds: getCharacterIds(media, 'SUPPORTING')
         });
     });
     return mediaEntries.sortByKey('score');
@@ -27,14 +21,14 @@ let getMediaEntries = function(entries) {
 let getCharacters = function(entries) {
     let characters = {};
     entries.forEach(entry => {
-        entry.media.characters.nodes.forEach(c => {
-            let idKey = c.id.toString();
+        entry.media.characters.edges.forEach(({node}) => {
+            let idKey = node.id.toString();
             if (characters.hasOwnProperty(idKey)) return;
             characters[idKey] = {
-                id: c.id,
-                name: c.name,
-                image: c.image,
-                popularity: c.favourites
+                id: node.id,
+                name: node.name.full,
+                image: node.image.medium,
+                popularity: node.favourites
             };
         });
     });
@@ -57,7 +51,6 @@ export default function({ngapp}) {
         this.getDataFromAnilist = function(list) {
             return anilistService.getListEntriesWithCharacters({
                 userName: list.profileName,
-                role: 'MAIN',
                 mediaType: 'ANIME',
                 status: 'COMPLETED'
             }).then((entries) => {
