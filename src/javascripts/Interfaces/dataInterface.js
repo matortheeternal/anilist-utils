@@ -20,7 +20,7 @@ export default function({ngapp, fh}) {
             service.generateFilename = function(base) {
                 let filename = `${base}.${ext}`,
                     n = 1;
-                while (fh.exists(fh.path(dataPath, filename)))
+                while (fh.jetpack.exists(fh.path(dataPath, filename)))
                     filename = `${base}-${++n}.${ext}`;
                 return filename;
             }

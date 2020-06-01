@@ -27,7 +27,7 @@ export default function(remote, jetpack) {
     };
 
     fh.saveJsonFile = function(filename, value, minify = false) {
-        fh.jetpack.write(filename, minify ? JSON.stringify(value) : value);
+        fh.jetpack.write(filename, angular.toJson(value, !minify));
     };
 
     fh.getFileBase = function(filePath) {
