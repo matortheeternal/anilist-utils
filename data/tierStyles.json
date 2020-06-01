@@ -1,0 +1,100 @@
+[
+  {
+    "label": "Default",
+    "rules": {
+      "background-color": "white",
+      "color": "black"
+    }
+  },
+  {
+    "label": "Maroon",
+    "rules": {
+      "background-color": "maroon",
+      "color": "white"
+    }
+  },
+  {
+    "label": "Dark Red",
+    "rules": {
+      "background-color": "darkred",
+      "color": "white"
+    }
+  },
+  {
+    "label": "Red",
+    "rules": {
+      "background-color": "red",
+      "color": "white"
+    }
+  },
+  {
+    "label": "Orange",
+    "rules": {
+      "background-color": "orange",
+      "color": "black"
+    }
+  },
+  {
+    "label": "Coral",
+    "rules": {
+      "background-color": "coral",
+      "color": "black"
+    }
+  },
+  {
+    "label": "Yellow",
+    "rules": {
+      "background-color": "yellow",
+      "color": "black"
+    }
+  },
+  {
+    "label": "Gold",
+    "rules": {
+      "background-color": "gold",
+      "color": "black"
+    }
+  },
+  {
+    "label": "Dark Sea Green",
+    "rules": {
+      "background-color": "darkseagreen",
+      "color": "black"
+    }
+  },
+  {
+    "label": "Forest Green",
+    "rules": {
+      "background-color": "forestgreen",
+      "color": "white"
+    }
+  },
+  {
+    "label": "Thistle",
+    "rules": {
+      "background-color": "thistle",
+      "color": "black"
+    }
+  },
+  {
+    "label": "Sky Blue",
+    "rules": {
+      "background-color": "skyblue",
+      "color": "black"
+    }
+  },
+  {
+    "label": "Dark Blue",
+    "rules": {
+      "background-color": "darkblue",
+      "color": "white"
+    }
+  },
+  {
+    "label": "Purple",
+    "rules": {
+      "background-color": "purple",
+      "color": "white"
+    }
+  }
+]

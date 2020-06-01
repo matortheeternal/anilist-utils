@@ -30,8 +30,10 @@ body > .content {
 
 ui-view {
     text-align: center;
-    flex-grow: 1;
     overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 43px);
 }
 
 .monospace {
@@ -45,5 +47,7 @@ ui-view {
 @import './Views/base';
 @import './Views/editCharacterListView';
 @import './Components/tierChart';
+@import './Components/tierRow';
 @import './Components/expandableSection';
 @import './Components/characterImage';
+@import './Components/dropdown';

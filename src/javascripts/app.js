@@ -24,6 +24,14 @@ import expandableSection from "./Directives/expandableSection";
 import characterListDisplayInterface from "./Interfaces/characterListDisplayInterface";
 import elasticInput from "./Directives/elasticInput";
 import scalingText from "./Directives/scalingText";
+import keycodeService from "./Services/keycodeService";
+import hotkeyService from "./Services/hotkeyService";
+import hotkeyInterface from "./Interfaces/hotkeyInterface";
+import dropdown from "./Directives/dropdown";
+import eventService from "./Services/eventService";
+import tierRow from "./Directives/tierRow";
+import tierStyleService from "./Services/tierStyleService";
+import dropdownHotkeys from "./Hotkeys/dropdownHotkeys";
 
 // set up angular application
 let ngapp = angular.module('application', [
@@ -43,12 +51,20 @@ ngapp.config(function ($urlMatcherFactoryProvider) {
 dataInterface(args);
 listDragInterface(args);
 characterListDisplayInterface(args);
+hotkeyInterface(args);
 
 // SERVICES
 anilistService(args);
 characterListService(args);
 imageCacheService(args);
 htmlHelpers(args);
+keycodeService(args);
+hotkeyService(args);
+eventService(args);
+tierStyleService(args);
+
+// HOTKEYS
+dropdownHotkeys(args);
 
 // DIRECTIVES
 tierChart(args);
@@ -60,6 +76,8 @@ listView(args);
 expandableSection(args);
 elasticInput(args);
 scalingText(args);
+dropdown(args);
+tierRow(args);
 
 // VIEWS
 baseView(args);

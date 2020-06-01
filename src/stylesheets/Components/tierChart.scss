@@ -3,55 +3,5 @@ tier-chart {
   flex-direction: column;
   margin-bottom: 10px;
   border: 1px solid;
-
-  .tier-row {
-    display: flex;
-    position: relative;
-    min-height: 150px;
-    border-top: 1px solid;
-
-    &:first-of-type {
-      border-top: none;
-    }
-  }
-
-  .tier-label {
-    border-right: 1px solid;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    min-width: 100px;
-
-    textarea {
-      border: none;
-      font-family: inherit;
-      font-size: 40px;
-      text-align: center;
-      width: 90px;
-      max-height: 100%;
-      resize: none;
-      overflow-x: hidden;
-      overflow-wrap: normal;
-      text-overflow: ellipsis;
-      outline: none;
-    }
-  }
-
-  .remove-item {
-    position: absolute;
-    top: 0;
-    right: 3px;
-    cursor: pointer;
-  }
-
-  .tier-items {
-    flex-grow: 1;
-    overflow-x: hidden;
-
-    .list-items {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-    }
-  }
+  border-radius: 6px;
 }

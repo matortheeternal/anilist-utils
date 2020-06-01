@@ -47,6 +47,15 @@ export default function({ngapp}) {
                 return sortCharacters(characters);
             };
 
+            scope.updateGroup = {
+                Media: group => {
+                    group.characters = scope.getCharacters(group);
+                },
+                Popularity: group => {
+                    group.characters = group.characters.filter(showCharacter);
+                }
+            }.switch(() => scope.groupBy)
+
             scope.buildGroups = {
                 Media: () => {
                     let groups = scope.list.mediaEntries.map(entry => Object.assign({

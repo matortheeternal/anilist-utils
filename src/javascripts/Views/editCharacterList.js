@@ -50,9 +50,7 @@ export default function({ngapp}) {
         $scope.$on('itemRemoved', function() {
             if (!$scope.groups) return;
             $timeout(() => {
-                $scope.groups.forEach(group => {
-                    group.characters = $scope.getCharacters(group);
-                });
+                $scope.groups.forEach($scope.updateGroup);
             });
         });
 

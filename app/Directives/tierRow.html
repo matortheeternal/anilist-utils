@@ -1,0 +1,32 @@
+<div class="color-controls">
+    <dropdown items="styles" on-item-click="selectStyle">
+        <dropdown-display>
+            {{tier.style.label}}
+        </dropdown-display>
+        <dropdown-item>
+            <div ng-style="$parent.item.rules">{{::$parent.item.label}}</div>
+        </dropdown-item>
+    </dropdown>
+</div>
+<div class="tier-label">
+    <textarea ng-model="tier.label" target-height="140" scaling-text></textarea>
+</div>
+<div class="tier-items">
+    <list-view class="character-list" items="tier.characters" drag-type="characterList" drop-allowed="dropAllowed">
+        <character-image></character-image>
+    </list-view>
+</div>
+<div class="actions">
+    <div class="add-item" ng-click="addTier()" title="Add tier above">
+        <span class="fa fa-plus"></span>
+    </div>
+    <div class="move-up" ng-if="canMoveUp" ng-click="moveTierUp()" title="Move up">
+        <span class="fa fa-arrow-up"></span>
+    </div>
+    <div class="move-down" ng-if="canMoveDown" ng-click="moveTierDown()" title="Move down">
+        <span class="fa fa-arrow-down"></span>
+    </div>
+    <div class="remove-item" ng-click="removeTier()" title="Remove tier">
+        <span class="fa fa-times"></span>
+    </div>
+</div>

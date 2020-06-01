@@ -44,6 +44,12 @@ Array.prototype.group = function(protoGroups, makeGroupFn, entriesKey = 'entries
     }, []);
 };
 
+Array.prototype.swap = function(index1, index2) {
+    let temp = this[index1];
+    this[index1] = this[index2];
+    this[index2] = temp;
+};
+
 Object.prototype.switch = function(getKey) {
     let options = this;
     return function() {
