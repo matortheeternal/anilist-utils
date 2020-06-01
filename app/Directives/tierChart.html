@@ -1,6 +1,6 @@
 <div class="tier-row" ng-repeat="tier in tiers">
     <div class="tier-label">
-        <input ng-model="tier.label" pu-elastic-input>
+        <textarea ng-model="tier.label" target-height="140" scaling-text></textarea>
     </div>
     <div class="remove-item" ng-click="removeTier(tier)">
         <span class="fa fa-times"></span>

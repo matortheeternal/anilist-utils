@@ -22,6 +22,8 @@ import ngDrag from './Directives/ngDrag.js';
 import ngDrop from './Directives/ngDrop.js';
 import expandableSection from "./Directives/expandableSection";
 import characterListDisplayInterface from "./Interfaces/characterListDisplayInterface";
+import elasticInput from "./Directives/elasticInput";
+import scalingText from "./Directives/scalingText";
 
 // set up angular application
 let ngapp = angular.module('application', [
@@ -56,6 +58,8 @@ ngDrag(args);
 ngDrop(args);
 listView(args);
 expandableSection(args);
+elasticInput(args);
+scalingText(args);
 
 // VIEWS
 baseView(args);
