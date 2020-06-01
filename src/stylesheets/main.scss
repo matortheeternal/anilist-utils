@@ -44,6 +44,23 @@ ui-view {
     cursor: pointer;
 }
 
+button {
+    border-radius: 4px;
+    font-size: 20px;
+    background-color: #70a0f0;
+    color: white;
+    font-weight: normal;
+    padding: 10px 24px;
+    border: none;
+    margin-left: 4px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+
+    &:hover {
+        background-color: #6090e0;
+    }
+}
+
 @import './Views/base';
 @import './Views/editCharacterListView';
 @import './Components/tierChart';
