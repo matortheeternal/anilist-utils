@@ -42,6 +42,28 @@ let getDefaultTiers = function() {
     }));
 };
 
+let importList = function(list) {
+    return Object.assign({}, list, {
+        tiers: list.tiers.map(tier => ({
+            label: tier.label,
+            style: tier.style,
+            characters: tier.characterIds.map(id => {
+                return list.characters[id];
+            })
+        }))
+    });
+};
+
+let exportList = function(list) {
+    return Object.assign({}, list, {
+        tiers: list.tiers.map(tier => ({
+            label: tier.label,
+            style: tier.style,
+            characterIds: tier.characters.pluck('id')
+        }))
+    });
+}
+
 export default function({ngapp}) {
     ngapp.service('characterListService', function(anilistService, dataInterface) {
         let service = this;
@@ -66,12 +88,12 @@ export default function({ngapp}) {
         this.loadList = function(filename) {
             let list = service.loadDataFile(filename);
             list.filename = filename;
-            return list;
+            return importList(list);
         };
 
         this.saveList = function(list) {
             if (!list.filename) list.filename = service.generateFilename(list.title);
-            service.saveDataFile(list.filename, list);
+            service.saveDataFile(list.filename, exportList(list));
         };
 
         this.newList = () => ({
