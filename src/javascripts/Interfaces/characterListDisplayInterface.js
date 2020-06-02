@@ -74,9 +74,13 @@ export default function({ngapp}) {
             }.switch(() => scope.groupBy);
 
             scope.buildCharacters = function() {
-                let characters = Object.values(scope.list.characters)
-                    .filter(showCharacter);
-                return sortCharacters(characters);
+                let characters = new Set();
+                scope.list.mediaEntries.forEach(entry => {
+                    scope.getCharacters(entry).forEach(character => {
+                        characters.add(character);
+                    });
+                });
+                return sortCharacters(Array.from(characters));
             };
         };
     });
