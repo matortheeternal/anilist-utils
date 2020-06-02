@@ -32,6 +32,7 @@ import eventService from "./Services/eventService";
 import tierRow from "./Directives/tierRow";
 import tierStyleService from "./Services/tierStyleService";
 import dropdownHotkeys from "./Hotkeys/dropdownHotkeys";
+import titleBar from "./Directives/titleBar";
 
 // set up angular application
 let ngapp = angular.module('application', [
@@ -78,6 +79,7 @@ elasticInput(args);
 scalingText(args);
 dropdown(args);
 tierRow(args);
+titleBar(args);
 
 // VIEWS
 baseView(args);
