@@ -19,10 +19,6 @@ export default function({ngapp}) {
         };
 
         // events
-        $scope.$on('itemRemoved', (e, item) => {
-            item.assigned = false;
-        });
-
         $scope.$on('itemAdded', (e, item) => {
             item.assigned = true;
         });

@@ -31,7 +31,7 @@
         </div>
 
         <div ng-if="groups" class="groups-container">
-            <div class="media-entry" ng-repeat="group in groups" ng-hide="!group.characters.length">
+            <div class="media-entry" ng-repeat="group in groups track by group.id" ng-hide="!group.characters.length">
                 <expandable-section>
                     <title>
                         {{::group.title}}

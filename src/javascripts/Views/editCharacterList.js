@@ -47,11 +47,8 @@ export default function({ngapp}) {
         $scope.dropAllowed = () => false;
 
         // events
-        $scope.$on('itemRemoved', function() {
-            if (!$scope.groups) return;
-            $timeout(() => {
-                $scope.groups.forEach($scope.updateGroup);
-            });
+        $scope.$on('characterRemoved', function() {
+            $timeout($scope.displayCharacters);
         });
 
         // watchers

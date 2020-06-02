@@ -34,6 +34,13 @@ export default function({ngapp}) {
             });
         };
 
+        $scope.$on('removeCharacter', (e, character) => {
+            $scope.tier.characters.remove(character);
+            character.assigned = false;
+            $scope.$emit('characterRemoved', character);
+            e.stopPropagation();
+        });
+
         $scope.$watch('$parent.$index', () => {
             $scope.canMoveUp = !$scope.$parent.$first;
             $scope.canMoveDown = !$scope.$parent.$last;
