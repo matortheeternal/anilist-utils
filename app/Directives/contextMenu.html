@@ -1,0 +1,5 @@
+<table tabindex="0" ng-keydown="onMenuKeyDown($event)">
+    <tbody>
+    <tr ng-repeat="item in items" ng-include="item.templateUrl" class="{{::item.divider ? 'divider' : 'item'}}" ng-mouseenter="selectItem($index)" ng-mouseleave="deselectItem($event, item)" ng-mousedown="clickItem($event, item)" ng-class="{'selected' : $index == currentIndex, 'disabled' : item.disabled}"></tr>
+    </tbody>
+</table>

@@ -1,4 +1,4 @@
-export default function({ngapp, remote}) {
+export default function({ngapp}) {
     ngapp.config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('base', {
             url: '',
@@ -7,29 +7,11 @@ export default function({ngapp, remote}) {
         });
     }]);
 
-    ngapp.controller('baseController', function ($rootScope, $scope, $document, $state) {
-        var hostWindow = remote.getCurrentWindow();
+    ngapp.controller('baseController', function ($rootScope, $scope, $document, $state, rootContextMenuInterface) {
+        // interfaces
+        rootContextMenuInterface($scope);
 
-        $scope.helpClick = function () {
-            //$scope.toggleHelpModal();
-        };
-
-        $scope.minimizeClick = function () {
-            hostWindow.minimize();
-        };
-
-        $scope.restoreClick = function () {
-            if (hostWindow.isMaximized()) {
-                hostWindow.unmaximize();
-            } else {
-                hostWindow.maximize();
-            }
-        };
-
-        $scope.closeClick = function () {
-            hostWindow.close();
-        };
-
+        // event handlers
         $scope.$on('terminate', function() {
             remote.app.forceClose = true;
             $scope.closeClick();

@@ -10,17 +10,20 @@ export default function({ngapp}) {
         };
     });
 
-    ngapp.controller('characterImageController', function($scope, $element, imageCacheService) {
+    ngapp.controller('characterImageController', function($scope, $element, contextMenuInterface) {
         if (!$scope.character) $scope.character = $scope.$parent.$parent.item;
         let remoteUrl = $scope.character && $scope.character.image;
 
         $element[0].style['background-image'] = `url("${remoteUrl}")`;
         $element[0].title = $scope.character.name;
-        /*imageCacheService.cache(remoteUrl).then(fileUrl => {
-            $scope.imageUrl = fileUrl;
-        }, err => {
-            console.error('Error loading image for character: ', character, err);
-            $scope.imageUrl = errorImageUrl;
-        });*/
+
+        // interfaces
+        contextMenuInterface($scope, 'characterImage');
+
+        // event handlers
+        $element.on('mousedown', e => {
+            if (e.button !== 2) return;
+            $scope.showContextMenu(e);
+        });
     });
 }

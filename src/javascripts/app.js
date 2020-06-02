@@ -32,7 +32,12 @@ import eventService from "./Services/eventService";
 import tierRow from "./Directives/tierRow";
 import tierStyleService from "./Services/tierStyleService";
 import dropdownHotkeys from "./Hotkeys/dropdownHotkeys";
+import contextMenuInterface from "./Interfaces/contextMenuInterface";
+import contextMenu from "./Directives/contextMenu";
+import contextMenuService from "./Services/contextMenuService";
+import rootContextMenuInterface from "./Interfaces/rootContextMenuInterface";
 import titleBar from "./Directives/titleBar";
+import characterImageMenuItems from "./MenuItems/characterImageMenuItems";
 
 // set up angular application
 let ngapp = angular.module('application', [
@@ -53,6 +58,8 @@ dataInterface(args);
 listDragInterface(args);
 characterListDisplayInterface(args);
 hotkeyInterface(args);
+contextMenuInterface(args);
+rootContextMenuInterface(args);
 
 // SERVICES
 anilistService(args);
@@ -63,9 +70,13 @@ keycodeService(args);
 hotkeyService(args);
 eventService(args);
 tierStyleService(args);
+contextMenuService(args);
 
 // HOTKEYS
 dropdownHotkeys(args);
+
+// MENU ITEMS
+characterImageMenuItems(args);
 
 // DIRECTIVES
 tierChart(args);
@@ -79,6 +90,7 @@ elasticInput(args);
 scalingText(args);
 dropdown(args);
 tierRow(args);
+contextMenu(args);
 titleBar(args);
 
 // VIEWS

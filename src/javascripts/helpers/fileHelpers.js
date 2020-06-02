@@ -1,4 +1,5 @@
 import url from 'url';
+import {shell} from "electron";
 
 export default function(remote, jetpack) {
     let fh = {};
@@ -48,6 +49,10 @@ export default function(remote, jetpack) {
 
     fh.getDateModified = function(filename) {
         return fh.jetpack.inspect(filename, {times: true}).modifyTime;
+    };
+
+    fh.openUrl = function(url) {
+        shell.openItem(url);
     };
 
     fh.pathToFileUrl = function(path) {

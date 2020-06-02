@@ -56,3 +56,8 @@ Object.prototype.switch = function(getKey) {
         return options[getKey()](...arguments);
     };
 };
+
+angular.default = function(scope, key, value) {
+    if (angular.isUndefined(scope[key]))
+        scope[key] = value;
+}

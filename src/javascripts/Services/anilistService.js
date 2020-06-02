@@ -52,5 +52,9 @@ export default function({ngapp}) {
                 }
             }, baseOptions)).then(extractEntries);
         };
+
+        this.getCharacterUrl = function(character) {
+            return `https://anilist.co/character/${character.id}`;
+        };
     });
 };
