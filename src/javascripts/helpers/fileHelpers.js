@@ -73,5 +73,13 @@ export default function(remote, jetpack) {
         return selection[0];
     };
 
+    fh.saveFile = function(title, defaultPath, filters = []) {
+        return remote.dialog.showSaveDialog({
+            title: title,
+            defaultPath: defaultPath,
+            filters: filters
+        });
+    };
+
     return fh;
 }

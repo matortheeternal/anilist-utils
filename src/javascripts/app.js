@@ -38,6 +38,7 @@ import contextMenuService from "./Services/contextMenuService";
 import rootContextMenuInterface from "./Interfaces/rootContextMenuInterface";
 import titleBar from "./Directives/titleBar";
 import characterImageMenuItems from "./MenuItems/characterImageMenuItems";
+import imageService from "./Services/imageService";
 
 // set up angular application
 let ngapp = angular.module('application', [
@@ -71,6 +72,7 @@ hotkeyService(args);
 eventService(args);
 tierStyleService(args);
 contextMenuService(args);
+imageService(args);
 
 // HOTKEYS
 dropdownHotkeys(args);

@@ -1,4 +1,15 @@
-export default function({ngapp}) {
+export default function({ngapp, remote}) {
+    let getImageSavePath = function() {
+        return remote.dialog.showSaveDialog({
+            title: 'Save character list',
+            defaultPath: remote.app.getPath('documents'),
+            filters: [{
+                name: 'PNG Images',
+                extensions: ['png']
+            }]
+        });
+    };
+
     ngapp.config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('base.editCharacterList', {
             templateUrl: 'Views/editCharacterList.html',
@@ -8,7 +19,7 @@ export default function({ngapp}) {
         });
     }]);
 
-    ngapp.controller('editCharacterListController', function($scope, $state, $stateParams, $timeout, characterListService, characterListDisplayInterface) {
+    ngapp.controller('editCharacterListController', function($scope, $state, $stateParams, $timeout, characterListService, characterListDisplayInterface, imageService) {
         $scope.list = $stateParams.list;
 
         // interfaces
@@ -38,6 +49,16 @@ export default function({ngapp}) {
 
         $scope.saveList = function() {
             characterListService.saveList($scope.list);
+        };
+
+        $scope.exportImage = function() {
+            getImageSavePath().then(result => {
+                if (result.canceled) return;
+                let [tierChartElement] = document.getElementsByTagName('tier-chart');
+                imageService.domToCanvas(tierChartElement, canvas => {
+                    imageService.canvasToFile(result.filePath, canvas);
+                });
+            });
         };
 
         $scope.back = function() {
