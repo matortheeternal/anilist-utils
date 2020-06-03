@@ -1,0 +1,21 @@
+.manage-character-lists {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+
+  .character-lists a {
+    cursor: pointer;
+    transition: color 0.4s ease-in-out;
+
+    &:hover {
+      color: darkblue;
+    }
+  }
+
+  .remove-item {
+    display: inline-block;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px black;
+    color: red;
+  }
+}

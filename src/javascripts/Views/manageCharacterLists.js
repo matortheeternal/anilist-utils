@@ -10,9 +10,9 @@ export default function({ngapp}) {
     ngapp.controller('manageCharacterListsController', function($scope, $state, characterListService) {
         $scope.lists = characterListService.getAvailableLists();
 
-        $scope.editList = function(filename) {
+        $scope.editList = function(list) {
             $state.go('base.editCharacterList', {
-                list: characterListService.loadList(filename)
+                list: characterListService.loadList(list.filePath)
             });
         };
 
@@ -22,9 +22,9 @@ export default function({ngapp}) {
             });
         };
 
-        $scope.deleteList = function(filename) {
-            $scope.lists.remove(filename);
-            characterListService.deleteList(filename);
+        $scope.deleteList = function(list) {
+            $scope.lists.remove(list);
+            characterListService.deleteList(list.filePath);
         };
     });
 }

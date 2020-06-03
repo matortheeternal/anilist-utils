@@ -64,7 +64,7 @@ let exportList = function(list) {
     });
 }
 
-export default function({ngapp}) {
+export default function({ngapp, fh}) {
     ngapp.service('characterListService', function(anilistService, dataInterface) {
         let service = this;
 
@@ -82,7 +82,10 @@ export default function({ngapp}) {
         };
 
         this.getAvailableLists = function() {
-            return service.listDataFiles();
+            return service.listDataFiles().map(filePath => ({
+                label: fh.getFileBase(filePath),
+                filePath
+            }));
         };
 
         this.loadList = function(filename) {
