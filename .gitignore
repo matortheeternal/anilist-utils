@@ -15,3 +15,5 @@ Thumbs.db
 
 /coverage
 .idea
+cache/
+data/characterLists/

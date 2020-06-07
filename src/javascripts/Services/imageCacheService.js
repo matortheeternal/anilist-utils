@@ -25,8 +25,10 @@ export default function({ngapp, fh}) {
                 request.get(imageUrl)
                     .on('error', reject)
                     .on('end', () => {
-                        fileStream.destroy();
-                        resolve(fh.pathToFileUrl(filePath));
+                        setTimeout(() => {
+                            fileStream.destroy();
+                            resolve(fh.pathToFileUrl(filePath));
+                        }, 50);
                     })
                     .pipe(fileStream);
             });
@@ -37,7 +39,7 @@ export default function({ngapp, fh}) {
             return new Promise((resolve, reject) => {
                 let cacheKey = fh.getFileName(imageUrl);
                 if (imageCache.hasOwnProperty(cacheKey))
-                    resolve(imageCache[cacheKey]);
+                    return resolve(imageCache[cacheKey]);
                 downloadImage(imageUrl).then(resolve, reject);
             });
         };
