@@ -8,7 +8,10 @@ export default function({ngapp}) {
         }
     });
 
-    ngapp.controller('tierRowController', function($scope, tierStyleService) {
+    ngapp.controller('tierRowController', function($scope, $element, tierStyleService, htmlHelpers) {
+        let {resolveElement} = htmlHelpers,
+            el = $element[0];
+
         $scope.tier = $scope.$parent.tier;
         $scope.styles = tierStyleService.styles;
 
@@ -33,6 +36,18 @@ export default function({ngapp}) {
                 $scope.tier.style = style;
             });
         };
+
+        $scope.$on('startExport', function() {
+            let tierLabel = resolveElement(el, '.tier-label'),
+                textarea = resolveElement(tierLabel, 'textarea'),
+                paragraph = resolveElement(tierLabel, 'p');
+            paragraph.style.fontSize = textarea.style.fontSize;
+            $scope.export = true;
+        });
+
+        $scope.$on('stopExport', function() {
+            $scope.export = false;
+        });
 
         $scope.$on('removeCharacter', (e, character) => {
             $scope.tier.characters.remove(character);

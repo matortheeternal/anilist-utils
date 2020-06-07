@@ -63,6 +63,13 @@ tier-row {
       color: inherit;
       cursor: text;
     }
+
+    p {
+      display: none;
+      width: 90px;
+      text-align: center;
+      text-overflow: ellipsis;
+    }
   }
 
   .tier-items {

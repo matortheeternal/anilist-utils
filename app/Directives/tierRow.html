@@ -1,4 +1,4 @@
-<div class="color-controls">
+<div class="color-controls" ng-hide="export">
     <dropdown items="styles" on-item-click="selectStyle">
         <dropdown-display>
             {{tier.style.label}}
@@ -9,14 +9,15 @@
     </dropdown>
 </div>
 <div class="tier-label">
-    <textarea ng-model="tier.label" target-height="140" scaling-text></textarea>
+    <textarea ng-hide="export" ng-model="tier.label" target-height="140" scaling-text></textarea>
+    <p ng-show="export">{{tier.label}}</p>
 </div>
 <div class="tier-items">
     <list-view class="character-list" items="tier.characters" drag-type="characterList" drop-allowed="dropAllowed" horizontal>
         <character-image></character-image>
     </list-view>
 </div>
-<div class="actions">
+<div class="actions" ng-hide="export">
     <div class="add-item" ng-click="addTier()" title="Add tier above">
         <span class="fa fa-plus"></span>
     </div>

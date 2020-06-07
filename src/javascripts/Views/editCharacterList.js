@@ -25,6 +25,15 @@ export default function({ngapp, remote}) {
         // interfaces
         characterListDisplayInterface($scope);
 
+        // helper functions
+        let exportImage = function({canceled, filePath}) {
+            if (canceled) return;
+            let [tierChart] = document.getElementsByTagName('tier-chart');
+            imageService.domToCanvas(tierChart, canvas => {
+                imageService.canvasToFile(filePath, canvas);
+            });
+        };
+
         // scope functions
         $scope.displayCharacters = function() {
             if (!$scope.list.mediaEntries) return;
@@ -52,11 +61,11 @@ export default function({ngapp, remote}) {
         };
 
         $scope.exportImage = function() {
-            getImageSavePath().then(result => {
-                if (result.canceled) return;
-                let [tierChartElement] = document.getElementsByTagName('tier-chart');
-                imageService.domToCanvas(tierChartElement, canvas => {
-                    imageService.canvasToFile(result.filePath, canvas);
+            $scope.$broadcast('startExport');
+            $timeout(() => {
+                getImageSavePath().then(result => {
+                    exportImage(result);
+                    $scope.$broadcast('stopExport');
                 });
             });
         };
