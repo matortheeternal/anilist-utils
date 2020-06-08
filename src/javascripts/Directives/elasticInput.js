@@ -15,7 +15,9 @@ export default function({ngapp}) {
         '<div style="position:fixed; top:-900px;"></div>'
     );
 
-    angular.element(document.body).append(wrapper);
+    setTimeout(() => {
+        angular.element(document.body).append(wrapper);
+    });
 
     let getPixelSize = function(style, key) {
         return parseInt(style.getPropertyValue(key));
@@ -78,12 +80,9 @@ export default function({ngapp}) {
         };
     };
 
-    let createMirror = function(scope, element, attrs) {
+    let createMirror = function(element, attrs) {
         let mirrorElement = createMirrorElement(element),
             update = makeUpdateFunction(element, attrs, mirrorElement);
-
-        scope.$watch(attrs.ngModel, update);
-        element.on('keydown keyup focus input propertychange change', update);
 
         return {
             element: mirrorElement,
@@ -92,12 +91,14 @@ export default function({ngapp}) {
         };
     };
 
-    ngapp.directive('elastic-input', function() {
+    ngapp.directive('elasticInput', function() {
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
-                let mirror = createMirror(scope, element, attrs);
+                let mirror = createMirror(element, attrs);
                 mirror.update();
+                scope.$watch(attrs.ngModel, mirror.update);
+                element.on('keyup input propertychange change', mirror.update);
                 scope.$on('$destroy', () => mirror.remove());
             }
         };
