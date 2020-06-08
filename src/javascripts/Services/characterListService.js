@@ -35,13 +35,6 @@ let getCharacters = function(entries) {
     return characters;
 };
 
-let getDefaultTiers = function() {
-    return ['A', 'B', 'C', 'D', 'F'].map(label => ({
-        label,
-        characters: []
-    }));
-};
-
 let importList = function(list) {
     return Object.assign({}, list, {
         tiers: list.tiers.map(tier => ({
@@ -65,11 +58,20 @@ let exportList = function(list) {
 }
 
 export default function({ngapp, fh}) {
-    ngapp.service('characterListService', function(anilistService, dataInterface) {
+    ngapp.service('characterListService', function(anilistService, dataInterface, tierStyleService) {
         let service = this;
+
+        let getDefaultTiers = function() {
+            return ['A', 'B', 'C', 'D', 'F'].map(label => ({
+                label,
+                style: tierStyleService.defaultStyle,
+                characters: []
+            }));
+        };
 
         dataInterface(service, 'characterLists');
 
+        // public API;
         this.getDataFromAnilist = function(list) {
             return anilistService.getListEntriesWithCharacters({
                 userName: list.profileName,
