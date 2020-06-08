@@ -1,15 +1,26 @@
 {
-  "name": "electron-boilerplate",
-  "productName": "Electron Boilerplate",
-  "description": "Starter for your Electron application",
-  "version": "0.0.0",
-  "author": "Mr. Gumby <mr.gumby@example.com>",
-  "copyright": "© 2017, Gumby inc.",
-  "homepage": "http://example.com",
+  "name": "anilist-utils",
+  "productName": "Anilist Utilities",
+  "description": "A collection of utilities for working with anilist.",
+  "version": "1.0.0",
+  "author": "Mator",
+  "copyright": "© 2020, Mator",
+  "repository": "https://github.com/matortheeternal/anilist-utils",
   "license": "MIT",
   "main": "app/background.js",
   "build": {
-    "appId": "com.example.electron-boilerplate",
+    "appId": "com.example.anilist-utils",
+    "productName": "Anilist Utils",
+    "win": {
+      "target": [
+        {
+          "target": "nsis"
+        },
+        {
+          "target": "portable"
+        }
+      ]
+    },
     "files": [
       "app/**/*",
       "node_modules/**/*",
@@ -18,10 +29,10 @@
     "publish": null
   },
   "scripts": {
-    "postinstall": "install-app-deps",
+    "postinstall": "electron-builder install-app-deps",
     "build": "gulp build",
     "prerelease": "gulp build --env=production",
-    "release": "build",
+    "release": "electron-builder build --x64 -p never",
     "start": "gulp start --env=development"
   },
   "dependencies": {
