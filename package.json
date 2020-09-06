@@ -26,6 +26,9 @@
       "node_modules/**/*",
       "package.json"
     ],
+    "extraFiles": [
+      "data/tierStyles.json"
+    ],
     "publish": null
   },
   "scripts": {
