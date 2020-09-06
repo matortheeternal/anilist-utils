@@ -9,7 +9,7 @@ export default function({ngapp}) {
             scope: {
                 callback: '='
             },
-            templateUrl: 'directives/dropover.html',
+            templateUrl: 'Directives/dropover.html',
             controller: 'dropoverController',
             link: function(scope, element) {
                 element[0].setAttribute('tabindex', '0');

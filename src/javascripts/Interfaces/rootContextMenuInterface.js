@@ -2,7 +2,7 @@ export default function({ngapp}) {
     ngapp.factory('rootContextMenuInterface', function($document, $timeout, htmlHelpers) {
         let buildTemplateUrl = function(item) {
             let templateName = `contextMenu${item.divider ? 'Divider' : 'Item'}`;
-            item.templateUrl = `directives/${templateName}.html`;
+            item.templateUrl = `Directives/${templateName}.html`;
             if (item.children) item.children.forEach(buildTemplateUrl);
         };
 

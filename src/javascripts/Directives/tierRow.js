@@ -3,7 +3,7 @@ export default function({ngapp}) {
         return {
             restrict: 'E',
             scope: true,
-            templateUrl: 'directives/tierRow.html',
+            templateUrl: 'Directives/tierRow.html',
             controller: 'tierRowController'
         }
     });

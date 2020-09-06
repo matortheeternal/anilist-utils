@@ -30,7 +30,7 @@ export default function({ngapp}) {
 
         return {
             restrict: 'E',
-            templateUrl: 'directives/contextMenu.html',
+            templateUrl: 'Directives/contextMenu.html',
             scope: {
                 items: '=',
                 offset: '=?',

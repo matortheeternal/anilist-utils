@@ -2,7 +2,7 @@ export default function({ngapp}) {
     ngapp.directive('listView', function() {
         return {
             restrict: 'E',
-            templateUrl: 'directives/listView.html',
+            templateUrl: 'Directives/listView.html',
             transclude: true,
             scope: {
                 items: '=',

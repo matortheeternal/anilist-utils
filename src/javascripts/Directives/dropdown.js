@@ -15,7 +15,7 @@ export default function({ngapp}) {
                 maxHeight: '=?',
                 width: '=?'
             },
-            templateUrl: 'directives/dropdown.html',
+            templateUrl: 'Directives/dropdown.html',
             controller: 'dropdownController',
             link: function(scope, element) {
                 element[0].setAttribute('tabindex', '0');
